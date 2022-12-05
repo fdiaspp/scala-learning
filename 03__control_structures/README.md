@@ -28,10 +28,42 @@ and, about side effects mentioned earlier
 
 ```scala
 // this performs a side effect
-if (a > b) something()
+if (a > b) doSomething()
 
 // since the main goal of this program is to run 
 // the following line
 println("Hello World")
 ```
+
+## FOR
+The basic structure is 
+
+```scala
+for (v <- values) println(v)
+```
+
+but it's possible to use more expression oriented pattern with .foreach methods, available on most collection classes.
+
+```scala
+values.foreach(println)
+```
+
+Important to note that is possible to iterate over maps too
+```scala
+val map_test = Map(
+    "description of value 1" -> 1,
+    "description of value 2" -> 2
+)
+
+for ((description, value) <- map_test) println(s"Description = $description and value = $value")
+map_test.foreach()
+```
+
+The keyword __yield__ is present here and can turn for loops into for loops expressions. 
+```scala
+val numbers = Seq(1,2,3)
+val doubles = for (number <- numbers) yield number * 2
+```
+
+
 
