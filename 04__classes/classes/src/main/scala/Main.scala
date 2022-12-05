@@ -14,11 +14,24 @@ object Main extends App{
 
 }
 
+trait DoTransfer {
+    var balance: Float
+
+    def transfer(account: Account, value: Float): Unit = {
+        balance -= value
+        account.balance += value
+    }
+}
 
 class Client(val name: String)
-class Account(val client: Client, var balance: Float = 0) {
-    
-    def transfer(account: Account, value: Float): Unit = {
+
+class Account(val client: Client, var balance: Float = 0) extends DoTransfer {
+
+    def printBalance(): Unit = {
+        println(s"Saldo ${client.name}: ${balance}")
+    }
+
+    override def transfer(account: Account, value: Float): Unit = {
         println(s"Transfere $value de ${client.name} para ${account.client.name}")
         
         balance -= value
@@ -26,10 +39,6 @@ class Account(val client: Client, var balance: Float = 0) {
 
         printBalance()
         account.printBalance()
-    }
-
-    def printBalance(): Unit = {
-        println(s"Saldo ${client.name}: ${balance}")
     }
 
     printBalance()
